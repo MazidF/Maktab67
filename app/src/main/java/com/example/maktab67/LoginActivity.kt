@@ -1,27 +1,22 @@
 package com.example.maktab67
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.widget.Toast
-import com.example.maktab67.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginBinding
+//    lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(LayoutInflater.from(this))
+/*        binding = ActivityLoginBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
-        init()
+        init()*/
+        setContentView(R.layout.test2_layout)
     }
 
 
 
-    @SuppressLint("RtlHardcoded")
+/*    @SuppressLint("RtlHardcoded")
     private fun init() {
         with(binding) {
             loginBtn.setOnClickListener {
@@ -51,5 +46,5 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 }
