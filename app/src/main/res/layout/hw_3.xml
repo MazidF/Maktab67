@@ -42,23 +42,12 @@
                 android:layout_marginTop="24dp"
                 android:background="#C63939" />
 
-            <FrameLayout
+            <View
+                android:id="@+id/categoryView"
+                android:background="#673AB7"
                 android:layout_width="120dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="16dp">
-
-                <View
-                    android:id="@+id/categoryView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#673AB7" />
-
-                <View
-                    android:id="@+id/categoryShimmer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-            </FrameLayout>
+                android:layout_marginTop="16dp" />
 
             <View
                 android:id="@+id/divider"
@@ -87,24 +76,13 @@
                     android:imeOptions="actionDone"
                     android:singleLine="true" />
 
-                <FrameLayout
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/editButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginEnd="16dp">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/editButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="10dp"
-                        android:src="@android:drawable/ic_menu_edit" />
-
-                    <View
-                        android:id="@+id/editShimmer"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone" />
-                </FrameLayout>
+                    android:layout_marginEnd="16dp"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_menu_edit" />
 
             </LinearLayout>
 
