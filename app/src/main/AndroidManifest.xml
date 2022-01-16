@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Maktab67">
         <activity
-            android:name=".DoozActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".DiceActivity"
@@ -19,7 +19,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".DoozActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
