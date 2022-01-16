@@ -29,9 +29,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menu.add("dice").apply {
+        menu.add("Dice").apply {
             setOnMenuItemClickListener {
                 startActivity(Intent(this@MainActivity, DiceActivity::class.java))
+                false
+            }
+        }
+        menu.add("Dooz").apply {
+            setOnMenuItemClickListener {
+                startActivity(Intent(this@MainActivity, DoozActivity::class.java))
                 false
             }
         }
