@@ -3,37 +3,101 @@ package com.example.maktab67
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.Color.RED
+import android.graphics.Color.*
 import android.graphics.PorterDuff
+import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.InputType.*
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
+import android.text.method.TransformationMethod
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.core.widget.doOnTextChanged
 import com.example.maktab67.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
+    var hasSaved = false
+    set(value) {
+        if (value) {
+            binding.autoCompleteBtn.visibility = View.VISIBLE
+        } else {
+            binding.autoCompleteBtn.visibility = View.GONE
+        }
+        field = value
+    }
     lateinit var binding: ActivityLoginBinding
     var focused: View? = null
     lateinit var emailRegex: Regex
     lateinit var nameRegex: Regex
+    lateinit var views: ArrayList<EditText>
 
+    companion object {
+        const val MARK = "mark"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        hasSaved = getSharedPreferences(packageName, MODE_PRIVATE).getBoolean("hasSaved", false)
         init()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add("Clear").apply {
+            this.setShowAsAction(1)
+            setOnMenuItemClickListener {
+                clear()
+                removeFocus()
+                false
+            }
+        }
+        menu.add("Reset").apply {
+            setOnMenuItemClickListener {
+                reset()
+                false
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun clear() {
+        for (view in views) {
+            view.setText("") // view.text.clear()
+            view.requestFocus()
+        }
+        with(binding) {
+            genderGroup.check(-1)
+            val size = loginList.size
+            for (i in 11 until size) {
+                loginList.removeView(loginList[11])
+            }
+        }
+    }
+
+    private fun reset() {
+        val dialog = AlertDialog.Builder(this@LoginActivity)
+            .setTitle("RESET!!")
+            .setMessage("Are you sure?")
+            .setPositiveButton("Yes") { _, _ ->
+                getSharedPreferences(packageName, MODE_PRIVATE).edit().clear().apply()
+                hasSaved = false
+            }.setNeutralButton("Cancel") { _, _ -> }
+            .create()
+        dialog.show()
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun init() {
+        views = ArrayList(5)
         emailRegex = Regex("^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
         nameRegex = Regex("^\\s*([a-zA-Z]+\\s)+[a-zA-Z]+\\s*$")
         with(binding) {
@@ -51,12 +115,15 @@ class LoginActivity : AppCompatActivity() {
                 addView(addEditText("Password", TYPE_TEXT_VARIATION_PASSWORD) {
                     passwordView = this
                     transformationMethod = PasswordTransformationMethod.getInstance()
-                    this.tag = this.textColors
+                    this.tag = object : TransformationMethod {
+                        override fun getTransformation(p0: CharSequence, p1: View?) = p0
+                        override fun onFocusChanged(p0: View?, p1: CharSequence?, p2: Boolean, p3: Int, p4: Rect?) {}
+                    }
                     doOnTextChanged { text, _, _, _ ->
                         if (text!!.count() < 6) {
                             this.setTextColor(RED)
                         } else {
-                            this.setTextColor(tag as? ColorStateList)
+                            this.setTextColor(views[4].tag as? ColorStateList)
                         }
                         rePasswordView?.text = rePasswordView!!.text
                     }
@@ -66,8 +133,7 @@ class LoginActivity : AppCompatActivity() {
                     transformationMethod = PasswordTransformationMethod.getInstance()
                     this.tag = this.textColors
                     doOnTextChanged { text, _, _, _ ->
-                        Log.e("myLog", text!!.toString())
-                        if (text.toString() == passwordView!!.text.toString() && text.count() >= 6) {
+                        if (text.toString() == passwordView!!.text.toString() && text!!.count() >= 6) {
                             this.setTextColor(tag as? ColorStateList)
                         } else {
                             this.setTextColor(RED)
@@ -81,8 +147,103 @@ class LoginActivity : AppCompatActivity() {
             loginScroller.setOnClickListener {
                 removeFocus()
             }
+            registerBtn.apply {
+                changeColor(this, Color.parseColor("#F33597"))
+                setOnClickListener {
+                    if (check()) {
+                        save()
+                    }
+                }
+            }
+            autoCompleteBtn.apply {
+                changeColor(this, Color.parseColor("#3158CD"))
+                setOnClickListener {
+                    load()
+                }
+            }
+            checkBox.apply {
+                val view = views[3]
+                setOnCheckedChangeListener { _, _ ->
+                    val temp = view.tag as TransformationMethod
+                    view.tag = view.transformationMethod
+                    view.transformationMethod = temp
+                }
+            }
+            scrollOption.apply {
+                val resource = this@LoginActivity.resources
+                val background = resource.getDrawable(R.drawable.my_button)
+                fun addView(text: String, background: Drawable): TextView {
+                    return TextView(this@LoginActivity).apply {
+                        this.textSize = 24f
+                        this.text = text
+                        this.background = background
+                        changeColor(this, GREEN)
+                    }
+                }
+                setOnClickListener {
+                    repeat(10) {
+                        loginList.addView(addView("\nTextView$it\n", background))
+                    }
+                }
+            }
         }
     }
+
+    private fun toast(msg: String, time: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, msg, time).show()
+    }
+
+    private fun check(): Boolean {
+        var result = true
+        with(binding) {
+            genderTitle.error = if (genderGroup.checkedRadioButtonId == -1) {
+                result = false
+                "!!!"
+            } else {
+                null
+            }
+        }
+        for (view in views.reversed()) {
+            if (view.text.isEmpty() || view.textColors.defaultColor == RED) {
+                view.error = "Invalid Input!!!"
+                result = false
+            }
+        }
+        return result
+    }
+
+    private fun save() {
+        val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
+        sharedPreferences.edit().apply {
+            for (i in views.indices) {
+                views[i].error = null
+                putString("$i", views[i].text.toString())
+            }
+            hasSaved = true
+            putBoolean("hasSaved", hasSaved)
+            putInt("gender", binding.genderGroup.checkedRadioButtonId)
+        }.apply()
+    }
+
+    private fun load() {
+        if (!hasSaved) return
+        getSharedPreferences(packageName, MODE_PRIVATE).run {
+            for (i in views.indices) {
+                views[i].setText(this.getString("$i", null))
+            }
+            binding.genderGroup.check(getInt("gender", -1))
+        }
+    }
+
+    private fun changeColor(view: View, color: Int) {
+        view.background.setTint(color)
+
+//        view.background.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+
+//        val gradientDrawable = view.background.mutate() as GradientDrawable
+//        gradientDrawable.setColor(color)
+    }
+
     private fun EditText.checkInput(regex: Regex) {
         this.tag = this.textColors
         doOnTextChanged { text, _, _, _ ->
@@ -102,11 +263,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addEditText(title: String, inputType: Int, apply: (EditText.() -> Unit)? = null): View {
-        val view = View.inflate(this, R.layout.my_edit_text, null)
-        val textView = view.findViewById<TextView>(R.id.editTextTitle).apply {
+        val root = View.inflate(this, R.layout.my_edit_text, null)
+        val textView = root.findViewById<TextView>(R.id.editTextTitle).apply {
             text = title
         }
-        view.findViewById<EditText>(R.id.editTextText).apply {
+        val editText = root.findViewById<EditText>(R.id.editTextText).apply {
             hint = title
             setInputType(inputType)
             setOnFocusChangeListener { view, hasFocus ->
@@ -114,7 +275,7 @@ class LoginActivity : AppCompatActivity() {
                     focused = view
                     if (textView.visibility != View.VISIBLE) {
                         textView.visibility = View.VISIBLE
-                        background.setColorFilter(Color.parseColor("#0048FF"), PorterDuff.Mode.SRC_ATOP)
+                        background.setColorFilter(parseColor("#0048FF"), PorterDuff.Mode.SRC_ATOP)
                         hint = ""
                     }
                 } else {
@@ -129,6 +290,7 @@ class LoginActivity : AppCompatActivity() {
                 apply(this)
             }
         }
-        return view
+        views.add(editText)
+        return root
     }
 }
