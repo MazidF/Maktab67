@@ -28,16 +28,7 @@ class DoozActivity : AppCompatActivity() {
     lateinit var botTarget: HashSet<Int>
     lateinit var botThreat: HashSet<Int>
     var botValue = 2
-    set(value) {
-/*        if (value == 1) { // bot -> blue
-            currentIsBlue = false
-            isBlueTurn = true
-        } else if (value == -1) { // bot -> red
-            currentIsBlue = true
-            isBlueTurn = false
-        }*/
-        field = value
-    } get() {
+        get() {
         if (field == 2) throw Exception("bot value has a problem!!")
         return field
     }
@@ -349,6 +340,8 @@ class DoozActivity : AppCompatActivity() {
         setTurn()
         binding.doozRestartBtn.visibility = View.INVISIBLE
         if (hasBot) { // when bot should start the game
+            botThreat.clear()
+            botTarget.clear()
             if (isBlueTurn) {
                 if (botValue == 1) decision()
             } else {

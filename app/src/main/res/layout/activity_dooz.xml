@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".DoozActivity">
 
     <ImageView
@@ -17,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dooz4"/>
+        app:layout_constraintTop_toBottomOf="@+id/dooz4" />
 
     <ImageView
         android:id="@+id/dooz8"
@@ -29,7 +30,7 @@
         app:layout_constraintEnd_toStartOf="@+id/dooz9"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dooz7"
-        app:layout_constraintTop_toBottomOf="@+id/dooz5"/>
+        app:layout_constraintTop_toBottomOf="@+id/dooz5" />
 
     <ImageView
         android:id="@+id/dooz9"
@@ -41,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dooz8"
-        app:layout_constraintTop_toBottomOf="@+id/dooz6"/>
+        app:layout_constraintTop_toBottomOf="@+id/dooz6" />
 
     <ImageView
         android:id="@+id/dooz4"
@@ -54,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dooz1"/>
+        app:layout_constraintTop_toBottomOf="@+id/dooz1" />
 
     <ImageView
         android:id="@+id/dooz5"
@@ -66,7 +67,7 @@
         app:layout_constraintEnd_toStartOf="@+id/dooz6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dooz4"
-        app:layout_constraintTop_toBottomOf="@+id/dooz2"/>
+        app:layout_constraintTop_toBottomOf="@+id/dooz2" />
 
     <ImageView
         android:id="@+id/dooz6"
@@ -78,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dooz5"
-        app:layout_constraintTop_toBottomOf="@+id/dooz3"/>
+        app:layout_constraintTop_toBottomOf="@+id/dooz3" />
 
     <ImageView
         android:id="@+id/dooz1"
@@ -105,7 +106,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dooz1"
         app:layout_constraintTop_toBottomOf="@+id/turnViewer"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/dooz3"
@@ -118,7 +119,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dooz2"
         app:layout_constraintTop_toBottomOf="@+id/turnViewer"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
