@@ -10,22 +10,24 @@ import android.view.Menu
 import android.widget.Toast
 import com.example.maktab67.databinding.ActivityMainBinding
 import android.util.DisplayMetrics
+import android.view.MotionEvent
+import androidx.core.view.MotionEventCompat
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    var height = -1
-    var width = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        binding.root.setOnClickListener {
+            toast("touched")
+        }
+    }
 
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        height = displayMetrics.heightPixels
-        width = displayMetrics.widthPixels
+    private fun toast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -38,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         menu.add("Dooz").apply {
             setOnMenuItemClickListener {
                 startActivity(Intent(this@MainActivity, DoozActivity::class.java))
+                false
+            }
+        }
+        menu.add("Login").apply {
+            setOnMenuItemClickListener {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 false
             }
         }

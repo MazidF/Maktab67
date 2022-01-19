@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loginScroller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/loginScroller"
+    android:background="#FFFFFF"
     android:fillViewport="true">
 
     <LinearLayout
         android:id="@+id/loginList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="30dp"
         android:paddingTop="60dp"
         android:paddingEnd="30dp"
-        android:paddingStart="30dp"
-        android:paddingBottom="40dp"
-        android:orientation="vertical">
+        android:paddingBottom="40dp">
 
-        <TextView
+        <CheckBox
+            android:id="@+id/checkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:text="Show Password" />
+
+        <TextView
+            android:id="@+id/genderTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Gender"/>
+            android:text="Gender"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <RadioGroup
+            android:id="@+id/genderGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/femaleBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -37,7 +46,7 @@
                 android:text="Female" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/maleBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -45,11 +54,33 @@
                 android:text="Male" />
         </RadioGroup>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/my_button"
+            android:hapticFeedbackEnabled="false"
             android:text="Register"
-            android:background="@drawable/my_button"/>
+            android:textColor="#FFFFFF" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/autoCompleteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/my_button"
+            android:text="Auto Complete"
+            android:textColor="#FFFFFF" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/scrollOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/my_button"
+            android:text="Scroll Option"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
