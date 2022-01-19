@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.example.maktab67.databinding.ActivityMorabarabaBinding
 import android.util.DisplayMetrics
+import android.view.View
 import android.widget.ImageView
 
 
@@ -19,16 +20,15 @@ class MorabarabaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMorabarabaBinding.inflate(LayoutInflater.from(this))
-        setContentView(R.layout.activity_morabaraba)
+        setContentView(binding.root)
         init()
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun init() {
         getSize()
-        board = Array(3) { Array(9) { 0 } }
         with(binding) {
-            list3.view1.setImageResource(R.drawable.dice_1)
+            imageView11.setImageResource(R.drawable.dice_1)
         }
     }
 
@@ -37,5 +37,9 @@ class MorabarabaActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         height = displayMetrics.heightPixels
         width = displayMetrics.widthPixels
+    }
+
+    fun imageClick(view: View?) {
+
     }
 }
