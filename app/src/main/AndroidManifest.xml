@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Maktab67">
         <activity
-            android:name=".MorabarabaActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".DoozActivity"
@@ -22,7 +22,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MorabarabaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
