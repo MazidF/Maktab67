@@ -1,5 +1,6 @@
 package com.example.maktab67
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color.RED
 import android.graphics.PorterDuff
@@ -15,6 +16,7 @@ import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.view.allViews
+import androidx.core.widget.ImageViewCompat
 
 
 class MorabarabaActivity : AppCompatActivity() {
@@ -31,22 +33,21 @@ class MorabarabaActivity : AppCompatActivity() {
         init()
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun init() {
         getSize()
         board = Array(3) { Array(9) { 0 } }
         with(binding) {
-            views = arrayOf(list1.load(), list2.load(), list3.load())
+            this@MorabarabaActivity.views = arrayOf(list1.init(), list2.init(), list3.init())
+            root.addView(View.inflate(this@MorabarabaActivity, R.layout.mylayout, null))
         }
     }
 
-    private fun FrameLayout.load() = allViews
-        .toList()
-        .filterIsInstance<ImageView>()
-        .map {
-                it.apply {
-                    background?.setTint(RED)
-                }
-        }.toTypedArray()
+    private fun FrameLayout.init(): Array<ImageView> {
+        val view = View.inflate(this@MorabarabaActivity, R.layout.mylayout, null)
+        this.addView(view)
+        return view.allViews.filterIsInstance<ImageView>().toList().toTypedArray()
+    }
 
     private fun getSize() {
         val displayMetrics = DisplayMetrics()

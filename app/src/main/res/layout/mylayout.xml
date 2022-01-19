@@ -48,88 +48,77 @@
         tools:layout_editor_absoluteY="231dp" />
 
     <ImageView
-        android:id="@+id/view13"
+        android:id="@+id/view1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/view16"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/top2"
-        app:srcCompat="@drawable/circle_shape" />
+        android:src="@drawable/circle_shape" />
 
     <ImageView
-        android:id="@+id/view15"
+        android:id="@+id/view2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/view3"
+        app:layout_constraintStart_toEndOf="@+id/view1"
+        app:layout_constraintTop_toTopOf="@id/top2"
+        android:src="@drawable/circle_shape" />
+
+    <ImageView
+        android:id="@+id/view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view16"
+        app:layout_constraintStart_toEndOf="@+id/view2"
         app:layout_constraintTop_toTopOf="@id/top2"
-        app:srcCompat="@drawable/circle_shape" />
+        android:src="@drawable/circle_shape" />
 
     <ImageView
-        android:id="@+id/view16"
+        android:id="@+id/view4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/view15"
-        app:layout_constraintStart_toEndOf="@+id/view13"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom2"
+        app:layout_constraintEnd_toStartOf="@+id/view5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/left2"
         app:layout_constraintTop_toTopOf="@id/top2"
-        app:srcCompat="@drawable/circle_shape" />
+        android:src="@drawable/circle_shape" />
 
     <ImageView
-        android:id="@+id/view19"
+        android:id="@+id/view5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/bottom2"
-        app:layout_constraintEnd_toStartOf="@+id/view18"
+        app:layout_constraintEnd_toStartOf="@+id/view6"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view17"
+        app:layout_constraintStart_toEndOf="@+id/view4"
         app:layout_constraintTop_toTopOf="@id/top2" />
 
     <ImageView
-        android:id="@+id/view18"
+        android:id="@+id/view6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="@id/bottom2"
         app:layout_constraintEnd_toStartOf="@+id/right2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view19"
+        app:layout_constraintStart_toEndOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@id/top2"
-        app:srcCompat="@drawable/circle_shape" />
+        android:src="@drawable/circle_shape" />
 
     <ImageView
-        android:id="@+id/view17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/bottom2"
-        app:layout_constraintEnd_toStartOf="@+id/view19"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toEndOf="@+id/left2"
-        app:layout_constraintTop_toTopOf="@id/top2"
-        app:srcCompat="@drawable/circle_shape" />
-
-    <ImageView
-        android:id="@+id/view22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/bottom2"
-        app:layout_constraintEnd_toStartOf="@+id/view21"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view20"
-        app:srcCompat="@drawable/circle_shape" />
-
-    <ImageView
-        android:id="@+id/view21"
+        android:id="@+id/view9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -138,20 +127,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/right2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view22"
-        app:srcCompat="@drawable/circle_shape" />
+        app:layout_constraintStart_toEndOf="@+id/view8"
+        android:src="@drawable/circle_shape" />
 
     <ImageView
-        android:id="@+id/view20"
+        android:id="@+id/view8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom2"
+        app:layout_constraintEnd_toStartOf="@+id/view9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view7"
+        android:src="@drawable/circle_shape" />
+
+    <ImageView
+        android:id="@+id/view7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="@id/bottom2"
-        app:layout_constraintEnd_toStartOf="@+id/view22"
+        app:layout_constraintEnd_toStartOf="@+id/view8"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toEndOf="@+id/left2"
-        app:srcCompat="@drawable/circle_shape" />
+        android:src="@drawable/circle_shape" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
