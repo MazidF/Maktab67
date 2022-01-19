@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MorabarabaActivity">
+
+    <ImageView
+        android:id="@+id/board"
+        android:layout_width="380dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/board_morabaraba" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/left1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="board"
+        tools:layout_editor_absoluteX="411dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/right1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="board"
+        tools:layout_editor_absoluteX="411dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/top1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="board"
+        tools:layout_editor_absoluteY="231dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bottom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="board"
+        tools:layout_editor_absoluteY="231dp" />
+
+    <FrameLayout
+        android:id="@+id/list1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/top1"
+        app:layout_constraintBottom_toBottomOf="@id/bottom1"
+        app:layout_constraintStart_toStartOf="@id/left1"
+        app:layout_constraintEnd_toEndOf="@id/right1">
+
+        <include layout="@layout/my_layout"
+            android:id="@+id/included1"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/list2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="52dp"
+        app:layout_constraintTop_toTopOf="@id/top1"
+        app:layout_constraintBottom_toBottomOf="@id/bottom1"
+        app:layout_constraintStart_toStartOf="@id/left1"
+        app:layout_constraintEnd_toEndOf="@id/right1">
+
+        <include layout="@layout/my_layout"
+            android:id="@+id/included2"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/list3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="108dp"
+        app:layout_constraintTop_toTopOf="@id/top1"
+        app:layout_constraintBottom_toBottomOf="@id/bottom1"
+        app:layout_constraintStart_toStartOf="@id/left1"
+        app:layout_constraintEnd_toEndOf="@id/right1">
+
+        <include layout="@layout/my_layout"
+            android:id="@+id/included3"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
