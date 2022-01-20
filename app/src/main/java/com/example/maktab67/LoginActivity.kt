@@ -1,6 +1,7 @@
 package com.example.maktab67
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Color.*
@@ -66,7 +67,31 @@ class LoginActivity : AppCompatActivity() {
                 false
             }
         }
+        menu.add("Edit").apply {
+           setOnMenuItemClickListener {
+               startActivityForResult(Intent(this@LoginActivity, EditActivity::class.java).apply {
+                   putExtra(EditActivity.FULL_NAME, views[0].text.toString())
+                   putExtra(EditActivity.USERNAME, views[1].text.toString())
+                   putExtra(EditActivity.EMAIL, views[2].text.toString())
+                   putExtra(EditActivity.PASSWORD, views[3].text.toString())
+               }, 1234)
+               false
+           }
+        }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1234) {
+            clear()
+            data!!.extras!!.let {
+                views[0].setText(it.getString(EditActivity.FULL_NAME, "empty"))
+                views[1].setText(it.getString(EditActivity.USERNAME, "empty"))
+                views[2].setText(it.getString(EditActivity.EMAIL, "empty"))
+                views[3].setText(it.getString(EditActivity.PASSWORD, "empty"))
+            }
+        }
     }
 
     private fun clear() {
@@ -237,11 +262,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun changeColor(view: View, color: Int) {
         view.background.setTint(color)
-
-//        view.background.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-
-//        val gradientDrawable = view.background.mutate() as GradientDrawable
-//        gradientDrawable.setColor(color)
     }
 
     private fun EditText.checkInput(regex: Regex) {

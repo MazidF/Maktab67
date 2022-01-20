@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loginScroller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -73,14 +74,28 @@
             android:text="Auto Complete"
             android:textColor="#FFFFFF" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/scrollOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/my_button"
+            android:backgroundTint="#99CD1C"
+            app:cornerRadius="24dp"
+            app:rippleColor="#CC771A"
             android:text="Scroll Option"
             android:textColor="#FFFFFF" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="27sp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="myButton"/>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

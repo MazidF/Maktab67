@@ -3,7 +3,6 @@ package com.example.maktab67
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.maktab67.databinding.ActivityDoozBinding
 
 class DoozActivity : AppCompatActivity() {
@@ -29,18 +29,20 @@ class DoozActivity : AppCompatActivity() {
     lateinit var botThreat: HashSet<Int>
     var botValue = 2
         get() {
-        if (field == 2) throw Exception("bot value has a problem!!")
-        return field
-    }
+            if (field == 2) throw Exception("bot value has a problem!!")
+            return field
+        }
     var remainPlaces = 9
     var redPoints = 0
     var bluePoints = 0
     var isPlaying = true
     var isBlueTurn = true
     var currentIsBlue = true
-    var icons = arrayOf(0, 0, 0,
-                        0, 0, 0,
-                        0, 0, 0)  // 1-> blue, -1 -> red, 0 -> null
+    var icons = arrayOf(
+        0, 0, 0,
+        0, 0, 0,
+        0, 0, 0
+    )  // 1-> blue, -1 -> red, 0 -> null
     lateinit var views: Array<ImageView>
     private var turning = HashSet<ImageView>(5)
     lateinit var turningThread: Thread
@@ -123,7 +125,7 @@ class DoozActivity : AppCompatActivity() {
                 }
                 .setPositiveButton("Me") { _, _ ->
                     botValue = -1
-                }.setNegativeButton("Bot") {_, _ ->
+                }.setNegativeButton("Bot") { _, _ ->
                     botValue = 1
                     decision()
                 }.create()
@@ -170,7 +172,7 @@ class DoozActivity : AppCompatActivity() {
     private fun onImageClick(view: View, fromBot: Boolean) {
         val image = view as ImageView
         if (!isPlaying || view.drawable != null) return
-        if (hasBot && ((currentIsBlue && botValue == 1)  || (!currentIsBlue && botValue == -1))) {
+        if (hasBot && ((currentIsBlue && botValue == 1) || (!currentIsBlue && botValue == -1))) {
             if (!fromBot) return
         }
 
@@ -179,7 +181,7 @@ class DoozActivity : AppCompatActivity() {
         view.translationY = -2000f
 
         val index = view.tag as Int
-        runOnUiThread{
+        runOnUiThread {
             image.setImageResource(getImage(index))
             currentIsBlue = !currentIsBlue
             setTurn()
@@ -329,7 +331,7 @@ class DoozActivity : AppCompatActivity() {
     fun restart(view: View?) {
         if (isPlaying) return
         isPlaying = true
-        icons = Array(9) {0}
+        icons = Array(9) { 0 }
         for (v in views) {
             v.setImageDrawable(null)
         }
@@ -351,13 +353,13 @@ class DoozActivity : AppCompatActivity() {
     }
 
     private fun getImage(tag: Int): Int {
-       return if (currentIsBlue) {
-           icons[tag] = 1
-           R.drawable.blue_o_icon
-       } else {
-           icons[tag] = -1
-           R.drawable.red_x_icon
-       }
+        return if (currentIsBlue) {
+            icons[tag] = 1
+            R.drawable.blue_o_icon
+        } else {
+            icons[tag] = -1
+            R.drawable.red_x_icon
+        }
     }
 
     fun reset() {
@@ -374,10 +376,14 @@ class DoozActivity : AppCompatActivity() {
             index = botThreat.stream().toArray()[0] as Int
             botThreat.remove(index)
         } else {
-            for (i in bestPlaces) {
-                if (icons[i] == 0) {
-                    index = i
-                    break
+            if (remainPlaces == 6 && (icons[0] == icons[8] && icons[8] == -botValue)) {
+                index = 1
+            } else {
+                for (i in bestPlaces) {
+                    if (icons[i] == 0) {
+                        index = i
+                        break
+                    }
                 }
             }
         }
