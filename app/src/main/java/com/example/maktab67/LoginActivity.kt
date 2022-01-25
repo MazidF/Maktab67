@@ -16,6 +16,8 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.widget.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
@@ -39,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var emailRegex: Regex
     lateinit var nameRegex: Regex
     lateinit var views: ArrayList<EditText>
+    lateinit var editLauncher: ActivityResultLauncher<Intent>
 
     companion object {
         const val MARK = "mark"
@@ -69,19 +72,20 @@ class LoginActivity : AppCompatActivity() {
         }
         menu.add("Edit").apply {
            setOnMenuItemClickListener {
-               startActivityForResult(Intent(this@LoginActivity, EditActivity::class.java).apply {
+               val intent = Intent(this@LoginActivity, EditActivity::class.java).apply {
                    putExtra(EditActivity.FULL_NAME, views[0].text.toString())
                    putExtra(EditActivity.USERNAME, views[1].text.toString())
                    putExtra(EditActivity.EMAIL, views[2].text.toString())
                    putExtra(EditActivity.PASSWORD, views[3].text.toString())
-               }, 1234)
+               }
+               editLauncher.launch(intent)
                false
            }
         }
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1234) {
             clear()
@@ -92,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                 views[3].setText(it.getString(EditActivity.PASSWORD, "empty"))
             }
         }
-    }
+    }*/
 
     private fun clear() {
         for (view in views) {
@@ -210,6 +214,15 @@ class LoginActivity : AppCompatActivity() {
                         loginList.addView(addView("\nTextView$it\n", background))
                     }
                 }
+            }
+        }
+        editLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            clear()
+            result.data!!.extras!!.let {
+                views[0].setText(it.getString(EditActivity.FULL_NAME, "empty"))
+                views[1].setText(it.getString(EditActivity.USERNAME, "empty"))
+                views[2].setText(it.getString(EditActivity.EMAIL, "empty"))
+                views[3].setText(it.getString(EditActivity.PASSWORD, "empty"))
             }
         }
     }
